@@ -170,22 +170,8 @@ section .eyebrow{margin-bottom:22px}
 .loc-copy strong{color:var(--ink);font-weight:500}
 
 /* ---------- plan osiedla (signature) ---------- */
-.plan-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center}
+.plan-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:start}
 @media(max-width:900px){.plan-grid{grid-template-columns:1fr}}
-.plan-svg{width:100%;height:auto}
-.house{
-  fill:var(--white);stroke:var(--ink);stroke-width:1.4;cursor:pointer;
-  transition:fill .18s;
-}
-.house:hover{fill:var(--sand)}
-.house.active{fill:var(--lake);stroke:var(--lake-deep)}
-.house-label{
-  font-family:'IBM Plex Mono',monospace;font-size:15px;fill:var(--ink);
-  pointer-events:none;text-anchor:middle;dominant-baseline:central;
-}
-.house.active + .house-label{fill:#fff}
-.plan-note{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.18em;fill:var(--ink-soft)}
-.lake-arrow{stroke:var(--lake);stroke-dasharray:4 5;fill:none;stroke-width:1.2}
 
 .panel{border:1px solid var(--ink);background:var(--white);padding:34px 34px 28px}
 .panel h3{font-size:30px;display:flex;align-items:baseline;gap:14px}
@@ -258,6 +244,42 @@ footer .wrap{display:grid;gap:22px}
 .legal{font-size:12px;color:var(--ink-soft);max-width:110ch;line-height:1.7}
 .credit{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
 
+/* ---------- hero note (PnB) ---------- */
+.hero-note{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.08em;color:var(--lake);margin-top:18px}
+
+/* ---------- lokalizacja mapa (ekspozycja) ---------- */
+.loc-map{margin-top:56px;border:1px solid var(--line);background:var(--white);padding:14px;cursor:zoom-in}
+.loc-map img{width:100%}
+.loc-map figcaption{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);padding:12px 4px 2px}
+
+/* ---------- plan: prawdziwy rysunek + wybór domu + rzuty ---------- */
+.plan-figure{border:1px solid var(--line);background:var(--white);padding:12px}
+.plan-figure img{width:100%;cursor:zoom-in}
+.plan-figure figcaption{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);padding:12px 4px 2px}
+.chips-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:24px}
+.chip{width:42px;height:42px;border:1px solid var(--line);background:var(--white);font-family:'IBM Plex Mono',monospace;font-size:14px;cursor:pointer;transition:background .2s,color .2s,border-color .2s;color:var(--ink-soft)}
+.chip:hover{border-color:var(--ink)}
+.chip.active{background:var(--lake-deep);color:#fff;border-color:var(--lake-deep)}
+.rzuty{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:24px}
+.rzut-mini{border:1px solid var(--line);background:var(--white);cursor:zoom-in;transition:box-shadow .3s}
+.rzut-mini:hover{box-shadow:0 12px 28px -18px rgba(39,43,49,.5)}
+.rzut-mini img{width:100%}
+.rzut-mini span{display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);padding:6px 8px;border-top:1px solid var(--line)}
+.rzuty-hint{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--lake);margin-top:14px}
+
+/* ---------- lightbox ---------- */
+.lightbox{position:fixed;inset:0;z-index:200;display:none;background:rgba(20,20,20,.94);align-items:center;justify-content:center;padding:24px}
+.lightbox.open{display:flex}
+.lightbox img{max-width:90vw;max-height:92vh;object-fit:contain}
+.lightbox .lb-close{position:absolute;top:16px;right:20px;background:none;border:1px solid rgba(255,255,255,.4);color:#fff;width:42px;height:42px;cursor:pointer;font-size:16px;z-index:2}
+.lightbox .lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.35);color:#fff;width:48px;height:48px;cursor:pointer;font-size:24px;line-height:1;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.lightbox .lb-nav:hover{background:rgba(255,255,255,.22)}
+.lightbox .lb-prev{left:20px}
+.lightbox .lb-next{right:20px}
+.lightbox.single .lb-nav{display:none}
+.lightbox .lb-cap{position:absolute;bottom:20px;left:0;right:0;text-align:center;color:rgba(255,255,255,.8);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+
 /* ---------- reveal ---------- */
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
@@ -288,10 +310,11 @@ footer .wrap{display:grid;gap:22px}
   <div class="hero wrap">
     <p class="eyebrow">Gdańsk Osowa · ul. Willowa</p>
     <h1>Dziewięć domów z&nbsp;widokiem na <em>Jezioro Wysockie</em></h1>
+    <p class="hero-note">Inwestycja z&nbsp;pozwoleniem na budowę (PnB) — na&nbsp;sprzedaż.</p>
     <div class="hero-lead">
       <p>Kameralne osiedle domów jednorodzinnych na skraju Osowej — z&nbsp;własnymi ogrodami,
-      garażami i&nbsp;tarasami na poddaszu, kilka minut od obwodnicy i&nbsp;stacji PKM.
-      Architektura projektowana z&nbsp;myślą o&nbsp;świetle, ciszy i&nbsp;widoku na jezioro.</p>
+      garażami, tarasami, poddaszem do&nbsp;własnego zagospodarowania, tylko kilka minut od&nbsp;obwodnicy
+      i&nbsp;stacji PKM. Architektura projektowana z&nbsp;myślą o&nbsp;świetle, ciszy i&nbsp;widoku na jezioro.</p>
       <div class="hero-facts">
         <div><b>9</b><small>domów A–I</small></div>
         <div><b>123–232 m²</b><small>pow. mieszkalna</small></div>
@@ -299,7 +322,7 @@ footer .wrap{display:grid;gap:22px}
         <div><b>3</b><small>kondygnacje</small></div>
       </div>
     </div>
-    <figure class="hero-img reveal">
+    <figure class="hero-img reveal" data-zoom="assets/render-aerial.webp" style="cursor:zoom-in">
       <img src="assets/render-aerial.webp" alt="Wizualizacja osiedla przy ul. Willowej z lotu ptaka, w tle Jezioro Wysockie" width="1680" height="1060">
       <figcaption class="hero-caption">Wizualizacja — widok z lotu ptaka</figcaption>
     </figure>
@@ -317,7 +340,7 @@ footer .wrap{display:grid;gap:22px}
           Z&nbsp;okien i&nbsp;tarasów domów rozciąga się widok na taflę jeziora i&nbsp;zieleń.</p>
           <p>Jednocześnie to jedna z najlepiej skomunikowanych dzielnic Trójmiasta:
           obwodnica S6 pozwala w&nbsp;kwadrans dojechać do Gdyni lub gdańskiej Oliwy,
-          a&nbsp;kolej PKM — bez samochodu do centrum Gdańska i&nbsp;na lotnisko.</p>
+          a&nbsp;kolej PKM — bez samochodu do centrum Gdańska, Gdyni i&nbsp;na lotnisko.</p>
           <p>W promieniu kilku minut: szkoły i przedszkola, sklepy, las Trójmiejskiego
           Parku Krajobrazowego oraz kąpielisko nad Jeziorem Wysockim.</p>
         </div>
@@ -331,10 +354,6 @@ footer .wrap{display:grid;gap:22px}
             <span class="val">1,8 <small>km</small></span>
           </div>
           <div class="dist-row">
-            <span class="label">Przystanek SKM Oliwa <small>szybka kolej miejska</small></span>
-            <span class="val">9,2 <small>km</small></span>
-          </div>
-          <div class="dist-row">
             <span class="label">Port Lotniczy im. Lecha Wałęsy <small>Gdańsk Rębiechowo</small></span>
             <span class="val">9,6 <small>km</small></span>
           </div>
@@ -344,6 +363,10 @@ footer .wrap{display:grid;gap:22px}
           </div>
         </div>
       </div>
+      <figure class="loc-map reveal" data-zoom="assets/location-map.webp">
+        <img src="assets/location-map.webp" alt="Mapa lokalizacji i ekspozycji inwestycji na Jezioro Wysockie" loading="lazy">
+        <figcaption>Ekspozycja osiedla na Jezioro Wysockie — położenie względem Trójmiasta</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -354,33 +377,27 @@ footer .wrap{display:grid;gap:22px}
       <div class="section-head">
         <h2>Wybierz swój dom</h2>
         <p>Dziewięć budynków ustawionych wzdłuż zachodniej i południowej granicy działki —
-        tak, aby ogrody i tarasy otwierały się na jezioro. Kliknij dom na planie, aby zobaczyć jego metraże.</p>
+        tak, aby ogrody i tarasy otwierały się na Jezioro Wysockie. Wybierz dom, aby zobaczyć jego metraże i rzuty kondygnacji.</p>
       </div>
       <div class="plan-grid">
-        <svg class="plan-svg reveal" viewBox="0 0 640 552" role="group" aria-label="Uproszczony plan osiedla — domy A–I">
-          <!-- granica działki -->
-          <path d="M168 24 L566 88 L578 468 L520 542 L236 500 L106 318 Z" fill="none" stroke="var(--sand)" stroke-width="1.4" stroke-dasharray="7 6"/>
-          <!-- strzałka widoku na jezioro -->
-          <path class="lake-arrow" d="M118 330 C 80 320, 52 300, 30 272"/>
-          <path d="M30 272 l10 2 m-10 -2 l3 10" stroke="var(--lake)" stroke-width="1.2" fill="none"/>
-          <text class="plan-note" x="16" y="258" text-anchor="start">WIDOK NA JEZIORO</text>
-          <text class="plan-note" x="600" y="60" text-anchor="end">UL. WILLOWA</text>
-          <!-- domy A–F (pierzeja zachodnia, lekki skos) -->
-          <g id="gA"></g>
-          <!-- domy generowane skryptem -->
-        </svg>
+        <figure class="plan-figure reveal" data-zoom="assets/site-plan.webp">
+          <img src="assets/estate-plan.webp" alt="Plan zagospodarowania — domy A–I z ekspozycją ogrodów na Jezioro Wysockie" width="940" height="1220">
+          <figcaption>Plan zagospodarowania — dziewięć domów z ekspozycją ogrodów na Jezioro Wysockie</figcaption>
+        </figure>
         <div class="panel reveal" id="housePanel" aria-live="polite">
-          <h3>Dom <span id="pLetter">A</span> <span class="tag" id="pType">segment 145,8 m²</span></h3>
+          <p class="chips-label">Wybierz dom</p>
+          <div class="chips" id="houseChips"></div>
+          <h3>Dom <span id="pLetter">A</span> <span class="tag" id="pType">Premium · 145,8 m²</span></h3>
           <div class="panel-rows" id="pRows"></div>
-          <p class="rooms" id="pRooms"></p>
-          <p class="hint">↑ kliknij dom na planie</p>
+          <div class="rzuty" id="pPlans"></div>
+          <p class="rzuty-hint">↑ kliknij rzut, aby powiększyć</p>
         </div>
       </div>
 
       <!-- typy -->
       <div class="types" id="domy">
         <article class="type reveal">
-          <h3>Dom rodzinny</h3>
+          <h3>Dom Premium</h3>
           <p class="letters">BUDYNKI A · B · C · D · E</p>
           <ul>
             <li>Pow. mieszkalna <b>145,8 m²</b></li>
@@ -425,15 +442,15 @@ footer .wrap{display:grid;gap:22px}
       <p class="eyebrow">Architektura</p>
       <div class="section-head">
         <h2>Rytm dachów, drewno i&nbsp;światło</h2>
-        <p>Charakterystyczna linia jednospadowych dachów, elewacje w naturalnym drewnie
-        i&nbsp;duże przeszklenia od strony ogrodów. Na poddaszach — tarasy skierowane na jezioro.</p>
+        <p>Charakterystyczna linia dachów, elewacje w&nbsp;naturalnych kolorach
+        i&nbsp;duże przeszklenia od strony ogrodów. Do tego — tarasy skierowane na jezioro.</p>
       </div>
       <div class="viz-grid">
-        <figure class="reveal">
+        <figure class="reveal" data-zoom="assets/render-entrance.webp" style="cursor:zoom-in">
           <img src="assets/render-entrance.webp" alt="Wizualizacja osiedla od strony wjazdu" loading="lazy" width="1700" height="950">
           <figcaption>Widok od strony wjazdu na osiedle</figcaption>
         </figure>
-        <figure class="reveal">
+        <figure class="reveal" data-zoom="assets/render-gardens.webp" style="cursor:zoom-in">
           <img src="assets/render-gardens.webp" alt="Wizualizacja osiedla od strony ogrodów z tarasami na poddaszu" loading="lazy" width="1700" height="900">
           <figcaption>Widok od strony ogrodów</figcaption>
         </figure>
@@ -449,7 +466,7 @@ footer .wrap{display:grid;gap:22px}
         <div><b>3 117 m²</b><small>powierzchnia działki</small></div>
         <div><b>50,3%</b><small>terenu biologicznie czynnego</small></div>
         <div><b>1 508,8 m²</b><small>łączna pow. użytkowa (PUM)</small></div>
-        <div><b>9 + 2</b><small>miejsc postojowych w garażach i naziemnych</small></div>
+        <div><b>10 + 10</b><small>miejsc garażowych i postojowych</small></div>
       </div>
     </div>
   </section>
@@ -461,10 +478,8 @@ footer .wrap{display:grid;gap:22px}
       <div class="contact-grid">
         <div class="contact-info reveal">
           <h2>Umów prezentację</h2>
-          <p style="margin-top:22px">Zostaw kontakt — odezwiemy się, aby umówić spotkanie na działce
-          i&nbsp;przedstawić szczegóły oferty oraz harmonogram inwestycji.</p>
-          <div class="line"><a href="tel:+48500000000">+48 500 000 000</a></div>
-          <div class="line"><a href="mailto:biuro@willowa-osowa.pl">biuro@willowa-osowa.pl</a></div>
+          <p style="margin-top:22px">Zostaw kontakt — odezwiemy się, aby umówić spotkanie
+          i&nbsp;przedstawić szczegóły oferty.</p>
           <div class="line">Gdańsk Osowa, ul. Willowa<br><span style="font-size:13px;color:var(--ink-soft)">działki nr ew. 279/3, 279/12, 279/13</span></div>
         </div>
         <form id="leadForm" class="reveal">
@@ -478,19 +493,9 @@ footer .wrap{display:grid;gap:22px}
               <input id="fPhone" name="phone" type="tel" autocomplete="tel">
             </div>
           </div>
-          <div class="form-row">
-            <div class="field">
-              <label for="fEmail">E-mail</label>
-              <input id="fEmail" name="email" type="email" autocomplete="email" required>
-            </div>
-            <div class="field">
-              <label for="fHouse">Interesujący dom</label>
-              <select id="fHouse" name="house">
-                <option value="dowolny">Dowolny</option>
-                <option>A</option><option>B</option><option>C</option><option>D</option><option>E</option>
-                <option>F</option><option>G</option><option>H</option><option>I</option>
-              </select>
-            </div>
+          <div class="field">
+            <label for="fEmail">E-mail</label>
+            <input id="fEmail" name="email" type="email" autocomplete="email" required>
           </div>
           <div class="field">
             <label for="fMsg">Wiadomość (opcjonalnie)</label>
@@ -518,64 +523,82 @@ footer .wrap{display:grid;gap:22px}
   </div>
 </footer>
 
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lb-close" aria-label="Zamknij">✕</button>
+  <button class="lb-nav lb-prev" aria-label="Poprzednie">‹</button>
+  <img id="lbImg" src="" alt="">
+  <button class="lb-nav lb-next" aria-label="Następne">›</button>
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
 <script>
 /* ---------- dane domów ---------- */
 const HOUSES = {
-  A:{type:'segment · 145,8 m²',rows:[['Pow. mieszkalna','145,8 m²'],['PUM z garażem','164,2 m²'],['Garaż','18,4 m²'],['Ogród','380,3 m²']],rooms:'Parter: salon z aneksem 33,1 m², WC, garaż · Piętro: sypialnia 13,9 m², dwa pokoje, garderoba, 2 łazienki · Poddasze: 35,2 m² z tarasem.'},
-  B:{type:'segment · 145,8 m²',rows:[['Pow. mieszkalna','145,8 m²'],['PUM z garażem','164,2 m²'],['Garaż','18,4 m²'],['Ogród','102,2 m²']],rooms:'Parter: salon z aneksem 33,1 m², WC, garaż · Piętro: sypialnia 13,9 m², dwa pokoje, garderoba, 2 łazienki · Poddasze: 35,2 m² z tarasem.'},
-  C:{type:'segment · 145,8 m²',rows:[['Pow. mieszkalna','145,8 m²'],['PUM z garażem','164,2 m²'],['Garaż','18,4 m²'],['Ogród','110,7 m²']],rooms:'Parter: salon z aneksem 33,1 m², WC, garaż · Piętro: sypialnia 13,9 m², dwa pokoje, garderoba, 2 łazienki · Poddasze: 35,2 m² z tarasem.'},
-  D:{type:'segment · 145,8 m²',rows:[['Pow. mieszkalna','145,8 m²'],['PUM z garażem','164,2 m²'],['Garaż','18,4 m²'],['Ogród','120,7 m²']],rooms:'Parter: salon z aneksem 33,1 m², WC, garaż · Piętro: sypialnia 13,9 m², dwa pokoje, garderoba, 2 łazienki · Poddasze: 35,2 m² z tarasem.'},
-  E:{type:'segment · 145,8 m²',rows:[['Pow. mieszkalna','145,8 m²'],['PUM z garażem','164,2 m²'],['Garaż','18,4 m²'],['Ogród','130,9 m²']],rooms:'Parter: salon z aneksem 33,1 m², WC, garaż · Piętro: sypialnia 13,9 m², dwa pokoje, garderoba, 2 łazienki · Poddasze: 35,2 m² z tarasem.'},
+  A:{type:'Premium · 145,8 m²',rows:[['Pow. mieszkalna','145,8 m²'],['PUM z garażem','164,2 m²'],['Garaż','18,4 m²'],['Ogród','380,3 m²']],rooms:'Parter: salon z aneksem 33,1 m², WC, garaż · Piętro: sypialnia 13,9 m², dwa pokoje, garderoba, 2 łazienki · Poddasze: 35,2 m² z tarasem.'},
+  B:{type:'Premium · 145,8 m²',rows:[['Pow. mieszkalna','145,8 m²'],['PUM z garażem','164,2 m²'],['Garaż','18,4 m²'],['Ogród','102,2 m²']],rooms:'Parter: salon z aneksem 33,1 m², WC, garaż · Piętro: sypialnia 13,9 m², dwa pokoje, garderoba, 2 łazienki · Poddasze: 35,2 m² z tarasem.'},
+  C:{type:'Premium · 145,8 m²',rows:[['Pow. mieszkalna','145,8 m²'],['PUM z garażem','164,2 m²'],['Garaż','18,4 m²'],['Ogród','110,7 m²']],rooms:'Parter: salon z aneksem 33,1 m², WC, garaż · Piętro: sypialnia 13,9 m², dwa pokoje, garderoba, 2 łazienki · Poddasze: 35,2 m² z tarasem.'},
+  D:{type:'Premium · 145,8 m²',rows:[['Pow. mieszkalna','145,8 m²'],['PUM z garażem','164,2 m²'],['Garaż','18,4 m²'],['Ogród','120,7 m²']],rooms:'Parter: salon z aneksem 33,1 m², WC, garaż · Piętro: sypialnia 13,9 m², dwa pokoje, garderoba, 2 łazienki · Poddasze: 35,2 m² z tarasem.'},
+  E:{type:'Premium · 145,8 m²',rows:[['Pow. mieszkalna','145,8 m²'],['PUM z garażem','164,2 m²'],['Garaż','18,4 m²'],['Ogród','130,9 m²']],rooms:'Parter: salon z aneksem 33,1 m², WC, garaż · Piętro: sypialnia 13,9 m², dwa pokoje, garderoba, 2 łazienki · Poddasze: 35,2 m² z tarasem.'},
   F:{type:'willa · dwa warianty',rows:[['Wariant dwulokalowy','153,4 + 56,2 m²'],['Wariant jednolokalowy','232,1 m²'],['Garaż (2 auta)','39,0 m²'],['Ogród','do 160,7 m²']],rooms:'Salon z aneksem 45,0 m², 4 sypialnie/pokoje, garderoby, pralnia · W wariancie jednolokalowym: kino 28,6 m² i sauna na poddaszu.'},
   G:{type:'kompakt · 123,3 m²',rows:[['Pow. mieszkalna','123,3 m²'],['PUM z garażem','139,4 m²'],['Garaż','16,1 m²'],['Ogród','27,8 m²']],rooms:'Parter: salon z aneksem 23,0 m², WC, garaż · Piętro: sypialnia 11,5 m², dwa pokoje, pralnia, 2 łazienki · Poddasze: 29,1 m² z tarasem.'},
   H:{type:'kompakt · 123,3 m²',rows:[['Pow. mieszkalna','123,3 m²'],['PUM z garażem','139,4 m²'],['Garaż','16,1 m²'],['Ogród','26,9 m²']],rooms:'Parter: salon z aneksem 23,0 m², WC, garaż · Piętro: sypialnia 11,5 m², dwa pokoje, pralnia, 2 łazienki · Poddasze: 29,1 m² z tarasem.'},
   I:{type:'kompakt · 123,3 m²',rows:[['Pow. mieszkalna','123,3 m²'],['PUM z garażem','139,4 m²'],['Garaż','16,1 m²'],['Ogród','109,3 m²']],rooms:'Parter: salon z aneksem 23,0 m², WC, garaż · Piętro: sypialnia 11,5 m², dwa pokoje, pralnia, 2 łazienki · Poddasze: 29,1 m² z tarasem.'}
 };
 
-/* ---------- rysowanie planu ---------- */
-const svg = document.querySelector('.plan-svg');
-const NS = 'http://www.w3.org/2000/svg';
-/* A–F wzdłuż zachodniej pierzei (skos), G–I wzdłuż południowej */
-const layout = [
-  {l:'A',x:150,y:52, w:96,h:46,r:-12},
-  {l:'B',x:162,y:104,w:96,h:46,r:-12},
-  {l:'C',x:174,y:156,w:96,h:46,r:-12},
-  {l:'D',x:186,y:208,w:96,h:46,r:-12},
-  {l:'E',x:198,y:260,w:96,h:46,r:-12},
-  {l:'F',x:206,y:314,w:112,h:62,r:-12},
-  {l:'G',x:346,y:368,w:52,h:92,r:36},
-  {l:'H',x:408,y:396,w:52,h:92,r:36},
-  {l:'I',x:470,y:424,w:52,h:92,r:36}
-];
-layout.forEach(o=>{
-  const g = document.createElementNS(NS,'g');
-  g.setAttribute('transform',`rotate(${o.r} ${o.x+o.w/2} ${o.y+o.h/2})`);
-  const r = document.createElementNS(NS,'rect');
-  r.setAttribute('x',o.x); r.setAttribute('y',o.y);
-  r.setAttribute('width',o.w); r.setAttribute('height',o.h);
-  r.setAttribute('class','house'); r.setAttribute('data-house',o.l);
-  r.setAttribute('tabindex','0'); r.setAttribute('role','button');
-  r.setAttribute('aria-label','Dom '+o.l);
-  const t = document.createElementNS(NS,'text');
-  t.setAttribute('x',o.x+o.w/2); t.setAttribute('y',o.y+o.h/2);
-  t.setAttribute('class','house-label'); t.textContent = o.l;
-  g.appendChild(r); g.appendChild(t); svg.appendChild(g);
-  r.addEventListener('click',()=>select(o.l));
-  r.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();select(o.l);} });
-});
+/* ---------- wybór domu: chipy A–I + rzuty ---------- */
+const LETTERS = ['A','B','C','D','E','F','G','H','I'];
+function planKey(l){ if(l==='F')return 'f'; if('GHI'.includes(l))return 'gi'; return 'ae'; }
+function plansFor(l){ const t=planKey(l);
+  return [['Parter','assets/rzut-'+t+'-parter.webp'],['Piętro','assets/rzut-'+t+'-pietro.webp'],['Poddasze','assets/rzut-'+t+'-poddasze.webp']]; }
+
+const chipsWrap = document.getElementById('houseChips');
+chipsWrap.innerHTML = LETTERS.map(l=>`<button class="chip" data-house="${l}" aria-label="Dom ${l}">${l}</button>`).join('');
+chipsWrap.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>select(b.dataset.house)));
 
 function select(letter){
-  document.querySelectorAll('.house').forEach(h=>h.classList.toggle('active',h.dataset.house===letter));
   const d = HOUSES[letter];
+  chipsWrap.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active',c.dataset.house===letter));
   document.getElementById('pLetter').textContent = letter;
   document.getElementById('pType').textContent = d.type;
   document.getElementById('pRows').innerHTML = d.rows.map(r=>`<div class="panel-row"><span>${r[0]}</span><span>${r[1]}</span></div>`).join('');
-  document.getElementById('pRooms').textContent = d.rooms;
-  const sel = document.getElementById('fHouse'); if(sel) sel.value = letter;
+  document.getElementById('pPlans').innerHTML = plansFor(letter).map(p=>
+    `<figure class="rzut-mini" data-zoom="${p[1]}"><img src="${p[1]}" alt="Rzut ${p[0].toLowerCase()} — dom ${letter}" loading="lazy"><span>${p[0]}</span></figure>`).join('');
 }
 select('A');
 
-/* ---------- formularz (mailto — podmień na własny backend / Formspree) ---------- */
+/* ---------- lightbox z nawigacją (rzuty danego domu, wizualizacje) ---------- */
+const lb = document.getElementById('lightbox'), lbImg = document.getElementById('lbImg'), lbCap = document.getElementById('lbCap');
+let lbGroup = [], lbI = 0;
+function lbShow(i){
+  lbI = (i + lbGroup.length) % lbGroup.length;
+  const it = lbGroup[lbI];
+  lbImg.src = it.src; lbImg.alt = it.cap;
+  lbCap.textContent = lbGroup.length > 1 ? (it.cap + '  ·  ' + (lbI+1) + '/' + lbGroup.length) : it.cap;
+}
+function openZoom(el){
+  const container = el.closest('#pPlans, .viz-grid');
+  const items = container ? [...container.querySelectorAll('[data-zoom]')] : [el];
+  lbGroup = items.map(x=>{ const img=x.querySelector('img'); return {src:x.getAttribute('data-zoom'), cap:img?img.alt:''}; });
+  lb.classList.toggle('single', lbGroup.length < 2);
+  lbShow(items.indexOf(el));
+  lb.classList.add('open'); lb.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+}
+function closeZoom(){ lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+document.addEventListener('click',e=>{
+  const z = e.target.closest('[data-zoom]');
+  if(z){ openZoom(z); return; }
+  if(e.target.classList.contains('lb-prev')){ lbShow(lbI-1); return; }
+  if(e.target.classList.contains('lb-next')){ lbShow(lbI+1); return; }
+  if(e.target===lb || e.target.classList.contains('lb-close')) closeZoom();
+});
+document.addEventListener('keydown',e=>{
+  if(!lb.classList.contains('open')) return;
+  if(e.key==='Escape') closeZoom();
+  else if(lbGroup.length>1 && e.key==='ArrowLeft') lbShow(lbI-1);
+  else if(lbGroup.length>1 && e.key==='ArrowRight') lbShow(lbI+1);
+});
+
+/* ---------- formularz (mailto → macrac@gmail.com) ---------- */
 document.getElementById('leadForm').addEventListener('submit',e=>{
   e.preventDefault();
   const f = e.target;
@@ -583,11 +606,10 @@ document.getElementById('leadForm').addEventListener('submit',e=>{
     'Imię i nazwisko: '+f.name.value,
     'Telefon: '+(f.phone.value||'—'),
     'E-mail: '+f.email.value,
-    'Interesujący dom: '+f.house.value,
     '', f.message.value
   ].join('\n');
-  location.href = 'mailto:biuro@willowa-osowa.pl'
-    + '?subject=' + encodeURIComponent('Zapytanie — Willowa Osowa (dom '+f.house.value+')')
+  location.href = 'mailto:macrac@gmail.com'
+    + '?subject=' + encodeURIComponent('Zapytanie — Willowa Osowa')
     + '&body=' + encodeURIComponent(body);
 });
 
