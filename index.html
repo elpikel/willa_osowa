@@ -37,7 +37,7 @@ body{
   font-size:17px;
   -webkit-font-smoothing:antialiased;
 }
-img{display:block;max-width:100%}
+img{display:block;max-width:100%;height:auto}
 a{color:inherit}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
 
@@ -53,6 +53,7 @@ a{color:inherit}
   gap:16px;
 }
 .eyebrow::after{content:'';height:1px;flex:0 0 56px;background:var(--lake);opacity:.5}
+@media(max-width:560px){.eyebrow::after{display:none}}
 
 h1,h2,h3{font-family:'Marcellus',serif;font-weight:400;line-height:1.16}
 h2{font-size:clamp(30px,4vw,44px);letter-spacing:.01em}
@@ -109,12 +110,12 @@ header{
   .nav-links a{display:block;padding:15px 2px;font-size:15px;color:var(--ink)}
   .nav-links .menu-cta{display:block;border-top:none;padding-top:16px}
   .nav-links .menu-cta .btn{display:inline-block;width:100%;text-align:center;padding:14px}
-  .hero{padding-top:56px}
   section{padding:72px 0}
 }
 
 /* ---------- hero ---------- */
 .hero{padding-top:88px}
+@media(max-width:1020px){.hero{padding-top:20px}}
 .hero .eyebrow{margin-bottom:26px}
 .hero h1{
   font-size:clamp(38px,6vw,68px);
@@ -283,7 +284,7 @@ footer .wrap{display:grid;gap:22px}
 
   <!-- ================= HERO ================= -->
   <div class="hero wrap">
-    <p class="eyebrow">Nowa inwestycja · Gdańsk Osowa · ul. Willowa</p>
+    <p class="eyebrow">Gdańsk Osowa · ul. Willowa</p>
     <h1>Dziewięć domów z&nbsp;widokiem na <em>Jezioro Wysockie</em></h1>
     <div class="hero-lead">
       <p>Kameralne osiedle domów jednorodzinnych na skraju Osowej — z&nbsp;własnymi ogrodami,
