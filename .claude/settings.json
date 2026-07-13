@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(magick gridfinal.png -resize 760x biggrid.png)",
+      "Bash(identify -format \"%wx%h\\\\n\" biggrid.png)",
+      "Bash(cd /Users/arkadiuszplichta/Repositories/willa_osowa *)"
+    ],
+    "additionalDirectories": [
+      "/private/tmp/claude-501/-Users-arkadiuszplichta-Repositories-willa-osowa/93866f30-5326-4639-beef-b1411cdce83f/scratchpad/pdf/out"
+    ]
+  }
+}
