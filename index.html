@@ -287,6 +287,15 @@ footer .wrap{display:grid;gap:22px}
 .lightbox.single .lb-nav{display:none}
 .lightbox .lb-cap{position:absolute;bottom:20px;left:0;right:0;text-align:center;color:rgba(255,255,255,.8);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase}
 
+/* ---------- film / youtube (facade) ---------- */
+.film-embed{position:relative;aspect-ratio:16/9;background:#0b0d0f;overflow:hidden;border:1px solid var(--line);cursor:pointer}
+.film-embed img{width:100%;height:100%;object-fit:cover;opacity:.9;transition:opacity .4s,transform 1.2s var(--ease)}
+.film-embed:hover img{opacity:1;transform:scale(1.03)}
+.film-embed .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:84px;height:84px;border-radius:50%;background:rgba(39,43,49,.66);border:1px solid rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;transition:background .3s,transform .3s}
+.film-embed:hover .play{background:var(--lake-deep);transform:translate(-50%,-50%) scale(1.06)}
+.film-embed .play::before{content:'';width:0;height:0;border-left:24px solid #fff;border-top:15px solid transparent;border-bottom:15px solid transparent;margin-left:6px}
+.film-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
 /* ---------- reveal ---------- */
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
@@ -299,6 +308,7 @@ footer .wrap{display:grid;gap:22px}
     <a class="brand" href="#top">Willowa <span>·</span> Osowa</a>
     <ul class="nav-links" id="navMenu">
       <li><a href="#lokalizacja">Lokalizacja</a></li>
+      <li><a href="#film">Film</a></li>
       <li><a href="#plan">Plan osiedla</a></li>
       <li><a href="#domy">Domy</a></li>
       <li><a href="#wizualizacje">Wizualizacje</a></li>
@@ -377,6 +387,21 @@ footer .wrap{display:grid;gap:22px}
     </div>
   </section>
 
+  <!-- ================= FILM ================= -->
+  <section id="film">
+    <div class="wrap">
+      <p class="eyebrow">Film</p>
+      <div class="section-head">
+        <h2>Zobacz teren w&nbsp;ruchu</h2>
+        <p>Krótki film z&nbsp;działki przy ul.&nbsp;Willowej — teren inwestycji i&nbsp;ekspozycja na Jezioro Wysockie.</p>
+      </div>
+      <div class="film-embed reveal" id="filmPlayer" data-yt="juthcuW_XTc" role="button" tabindex="0" aria-label="Odtwórz film">
+        <img src="assets/film-poster.webp" alt="Film — teren inwestycji Willowa Osowa z widokiem na Jezioro Wysockie" loading="lazy" width="1280" height="720">
+        <span class="play" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
   <!-- ================= PLAN OSIEDLA (interaktywny) ================= -->
   <section id="plan" class="alt">
     <div class="wrap">
@@ -448,7 +473,7 @@ footer .wrap{display:grid;gap:22px}
     <div class="wrap">
       <p class="eyebrow">Architektura</p>
       <div class="section-head">
-        <h2>Rytm dachów, drewno i&nbsp;światło</h2>
+        <h2>Rytm dachów, jezioro i&nbsp;światło</h2>
         <p>Charakterystyczna linia dachów, elewacje w&nbsp;naturalnych kolorach
         i&nbsp;duże przeszklenia od strony ogrodów. Do tego — tarasy skierowane na jezioro.</p>
       </div>
@@ -632,6 +657,18 @@ nm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
   nm.classList.remove('open');
   mt.setAttribute('aria-expanded','false');
 }));
+
+/* ---------- film youtube (ładuje iframe dopiero po kliknięciu) ---------- */
+const film = document.getElementById('filmPlayer');
+if(film){
+  const playFilm = () => {
+    const id = film.dataset.yt;
+    film.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1" title="Film — Willowa Osowa" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+    track('Film: odtworzenie');
+  };
+  film.addEventListener('click', playFilm);
+  film.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); playFilm(); } });
+}
 
 /* ---------- scroll reveal ---------- */
 if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
