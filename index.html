@@ -322,8 +322,8 @@ footer .wrap{display:grid;gap:22px}
         <div><b>3</b><small>kondygnacje</small></div>
       </div>
     </div>
-    <figure class="hero-img reveal" data-zoom="assets/render-aerial.webp" style="cursor:zoom-in">
-      <img src="assets/render-aerial.webp" alt="Wizualizacja osiedla przy ul. Willowej z lotu ptaka, w tle Jezioro Wysockie" width="1680" height="1060">
+    <figure class="hero-img reveal" data-zoom="assets/render-aerial-v2.webp" style="cursor:zoom-in">
+      <img src="assets/render-aerial-v2.webp" alt="Wizualizacja osiedla przy ul. Willowej z lotu ptaka, w tle Jezioro Wysockie" width="1680" height="1060">
       <figcaption class="hero-caption">Wizualizacja — widok z lotu ptaka</figcaption>
     </figure>
   </div>
@@ -363,8 +363,8 @@ footer .wrap{display:grid;gap:22px}
           </div>
         </div>
       </div>
-      <figure class="loc-map reveal" data-zoom="assets/location-map.webp">
-        <img src="assets/location-map.webp" alt="Mapa lokalizacji i ekspozycji inwestycji na Jezioro Wysockie" loading="lazy">
+      <figure class="loc-map reveal" data-zoom="assets/location-map-v2.webp">
+        <img src="assets/location-map-v2.webp" alt="Mapa lokalizacji i ekspozycji inwestycji na Jezioro Wysockie" loading="lazy">
         <figcaption>Ekspozycja osiedla na Jezioro Wysockie — położenie względem Trójmiasta</figcaption>
       </figure>
     </div>
@@ -380,8 +380,8 @@ footer .wrap{display:grid;gap:22px}
         tak, aby ogrody i tarasy otwierały się na Jezioro Wysockie. Wybierz dom, aby zobaczyć jego metraże i rzuty kondygnacji.</p>
       </div>
       <div class="plan-grid">
-        <figure class="plan-figure reveal" data-zoom="assets/site-plan.webp">
-          <img src="assets/estate-plan.webp" alt="Plan zagospodarowania — domy A–I z ekspozycją ogrodów na Jezioro Wysockie" width="940" height="1220">
+        <figure class="plan-figure reveal" data-zoom="assets/site-plan-v2.webp">
+          <img src="assets/estate-plan-v2.webp" alt="Plan zagospodarowania — domy A–I z ekspozycją ogrodów na Jezioro Wysockie" width="940" height="1220">
           <figcaption>Plan zagospodarowania — dziewięć domów z ekspozycją ogrodów na Jezioro Wysockie</figcaption>
         </figure>
         <div class="panel reveal" id="housePanel" aria-live="polite">
@@ -446,12 +446,12 @@ footer .wrap{display:grid;gap:22px}
         i&nbsp;duże przeszklenia od strony ogrodów. Do tego — tarasy skierowane na jezioro.</p>
       </div>
       <div class="viz-grid">
-        <figure class="reveal" data-zoom="assets/render-entrance.webp" style="cursor:zoom-in">
-          <img src="assets/render-entrance.webp" alt="Wizualizacja osiedla od strony wjazdu" loading="lazy" width="1700" height="950">
+        <figure class="reveal" data-zoom="assets/render-entrance-v2.webp" style="cursor:zoom-in">
+          <img src="assets/render-entrance-v2.webp" alt="Wizualizacja osiedla od strony wjazdu" loading="lazy" width="1700" height="950">
           <figcaption>Widok od strony wjazdu na osiedle</figcaption>
         </figure>
-        <figure class="reveal" data-zoom="assets/render-gardens.webp" style="cursor:zoom-in">
-          <img src="assets/render-gardens.webp" alt="Wizualizacja osiedla od strony ogrodów z tarasami na poddaszu" loading="lazy" width="1700" height="900">
+        <figure class="reveal" data-zoom="assets/render-gardens-v2.webp" style="cursor:zoom-in">
+          <img src="assets/render-gardens-v2.webp" alt="Wizualizacja osiedla od strony ogrodów z tarasami na poddaszu" loading="lazy" width="1700" height="900">
           <figcaption>Widok od strony ogrodów</figcaption>
         </figure>
       </div>
@@ -549,7 +549,7 @@ const HOUSES = {
 const LETTERS = ['A','B','C','D','E','F','G','H','I'];
 function planKey(l){ if(l==='F')return 'f'; if('GHI'.includes(l))return 'gi'; return 'ae'; }
 function plansFor(l){ const t=planKey(l);
-  return [['Parter','assets/rzut-'+t+'-parter.webp'],['Piętro','assets/rzut-'+t+'-pietro.webp'],['Poddasze','assets/rzut-'+t+'-poddasze.webp']]; }
+  return [['Parter','assets/rzut-'+t+'-parter-v2.webp'],['Piętro','assets/rzut-'+t+'-pietro-v2.webp'],['Poddasze','assets/rzut-'+t+'-poddasze-v2.webp']]; }
 
 const chipsWrap = document.getElementById('houseChips');
 chipsWrap.innerHTML = LETTERS.map(l=>`<button class="chip" data-house="${l}" aria-label="Dom ${l}">${l}</button>`).join('');
