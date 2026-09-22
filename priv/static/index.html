@@ -300,6 +300,9 @@ textarea{resize:vertical;min-height:110px}
 @media(max-width:600px){.form-row{grid-template-columns:1fr}}
 form .btn{justify-self:start;padding:14px 34px}
 .form-note{font-size:12.5px;color:var(--ink-soft)}
+.form-status{font-size:14px;margin:4px 0 0;min-height:1em}
+.form-status.ok{color:#2e7d32}
+.form-status.err{color:#c0392b}
 
 /* ---------- footer ---------- */
 footer{border-top:1px solid var(--line);padding:44px 0 60px;background:var(--paper-deep)}
@@ -592,6 +595,7 @@ footer .wrap{display:grid;gap:22px}
             <textarea id="fMsg" name="message"></textarea>
           </div>
           <button class="btn" type="submit">Wyślij zapytanie</button>
+          <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
           <p class="form-note">Wysyłając formularz wyrażasz zgodę na kontakt w sprawie oferty.
           Administratorem danych jest inwestor osiedla przy ul. Willowej w Gdańsku.</p>
         </form>
@@ -688,20 +692,48 @@ document.addEventListener('keydown',e=>{
   else if(lbGroup.length>1 && e.key==='ArrowRight') lbShow(lbI+1);
 });
 
-/* ---------- formularz (mailto → macrac@gmail.com) ---------- */
-document.getElementById('leadForm').addEventListener('submit',e=>{
+/* ---------- formularz (POST /api/lead → e-mail przez Brevo) ---------- */
+document.getElementById('leadForm').addEventListener('submit',async e=>{
   e.preventDefault();
   const f = e.target;
-  const body = [
-    'Imię i nazwisko: '+f.name.value,
-    'Telefon: '+(f.phone.value||'—'),
-    'E-mail: '+f.email.value,
-    '', f.message.value
-  ].join('\n');
-  track('Kontakt: formularz wysłany');
-  location.href = 'mailto:macrac@gmail.com'
-    + '?subject=' + encodeURIComponent('Zapytanie — Willowa Osowa')
-    + '&body=' + encodeURIComponent(body);
+  const btn = f.querySelector('button[type=submit]');
+  const status = document.getElementById('formStatus');
+  const payload = {
+    name: f.name.value,
+    phone: f.phone.value,
+    email: f.email.value,
+    message: f.message.value
+  };
+  btn.disabled = true;
+  const label = btn.textContent;
+  btn.textContent = 'Wysyłanie…';
+  status.textContent = '';
+  status.className = 'form-status';
+  try{
+    const res = await fetch('/api/lead',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    if(res.ok){
+      track('Kontakt: formularz wysłany');
+      f.reset();
+      status.textContent = 'Dziękujemy! Zapytanie zostało wysłane — odezwiemy się wkrótce.';
+      status.classList.add('ok');
+    }else{
+      const data = await res.json().catch(()=>({}));
+      status.textContent = data.error === 'invalid_email'
+        ? 'Podaj proszę poprawny adres e-mail.'
+        : 'Nie udało się wysłać zapytania. Spróbuj ponownie lub napisz na macrac@gmail.com.';
+      status.classList.add('err');
+    }
+  }catch(_err){
+    status.textContent = 'Brak połączenia. Spróbuj ponownie lub napisz na macrac@gmail.com.';
+    status.classList.add('err');
+  }finally{
+    btn.disabled = false;
+    btn.textContent = label;
+  }
 });
 
 /* ---------- menu mobilne ---------- */

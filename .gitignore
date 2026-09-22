@@ -1,0 +1,16 @@
+# Build artifacts
+/_build/
+/deps/
+/.elixir_ls/
+erl_crash.dump
+*.ez
+
+# Release artifacts
+willa_osowa-*.tar
+
+# Env files with secrets
+.env
+.env.*
+
+# macOS
+.DS_Store
